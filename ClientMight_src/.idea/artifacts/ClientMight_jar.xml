@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ClientMight:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ClientMight_jar</output-path>
+    <root id="archive" name="ClientMight.jar">
+      <element id="module-output" name="ClientMight" />
+    </root>
+  </artifact>
+</component>
