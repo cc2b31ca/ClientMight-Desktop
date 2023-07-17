@@ -1,5 +1,6 @@
 package src.Gui;
 
+import src.Audio.Sound_loop;
 import src.control.KButton;
 import src.control.KToggle;
 import src.Audio.Sound;
@@ -10,6 +11,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Settings extends JFrame {
+
+    audio_bgm Bgm = new audio_bgm();
+    audio_test Test = new audio_test();
+
     public Settings(){
         SettingGui();
     }
@@ -31,15 +36,15 @@ public class Settings extends JFrame {
         kb.setStateListener(new KButton.StateListener() {
             @Override
             public void statechange(Object src) {
-                new audio_test().start();
+                Test.start();
             }
         });
         KButton kb1 = new KButton(120,10,100,50,"KButton2");
         kb1.set_strings("播放背景音乐");
         kb1.setStateListener(new KButton.StateListener() {
             @Override
-            public void statechange(Object src) throws IOException {
-                new audio_bgm().start();
+            public void statechange(Object src){
+                Bgm.start();
             }
         });
         KButton debug_kb1 = new KButton(230,10,100,50,"Debug_Button1");
@@ -81,12 +86,7 @@ class audio_bgm extends Thread{
     @Override
     public void run() {
         super.run();
-        try{
-            Sound sound = new Sound("Assets/bgm.wav");
-            sound.start();
-            sound.stop();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Sound_loop sl = new Sound_loop("Assets/bgm.wav");
+        sl.loop();
     }
 }

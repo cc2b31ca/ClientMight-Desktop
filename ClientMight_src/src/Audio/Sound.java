@@ -9,7 +9,6 @@ public class Sound {
     private SourceDataLine sourceDataLine;
     public Sound(String Path){
         System.out.println(Path);
-        PlayAudio(Path);
     }
     private void PlayAudio(String path){
         try {
@@ -21,15 +20,13 @@ public class Sound {
         }
         catch (UnsupportedAudioFileException e){
             e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
+        } catch (IOException | LineUnavailableException e) {
             throw new RuntimeException(e);
         }
     }
     public void start() throws IOException {
         int count;
-        byte bit[] = new byte[1024];
+        byte[] bit = new byte[1024];
         sourceDataLine.start();
         while ((count = audioInputStream.read(bit,0,bit.length)) != -1){
             sourceDataLine.write(bit,0,count);
@@ -41,3 +38,4 @@ public class Sound {
         audioInputStream.close();
     }
 }
+
