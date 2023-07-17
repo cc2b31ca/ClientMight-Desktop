@@ -2,6 +2,7 @@ package src.Gui;
 
 import javax.swing.*;
 import src.Logos.*;
+import src.Logos.Scripts.Config;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,9 +12,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Gui extends JFrame {
-
     FileDialog openfiledialog = new FileDialog(this,Logovis.OpenFileDialogTitle,FileDialog.LOAD);
     JTextArea JTA = new JTextArea();
+
+    public static Config config = new Config();
+    public static boolean debug_er;
     //初始化用户界面
     public Gui(String debuger){
         System.out.println(debuger);
@@ -21,6 +24,7 @@ public class Gui extends JFrame {
         if(debuger.equals("debug")) Guiinit("欢迎 - " + Logovis.Logo + " - Debug",1);
         else Guiinit("欢迎 - " + Logovis.Logo,0);
         System.out.println(new Res().icones.toString());
+        new Gui_loop();
     }
     private void Guiinit(String name,int mode){
         setTitle(name);
@@ -32,6 +36,7 @@ public class Gui extends JFrame {
         if(mode == 1) Menu(1);
         else Menu(0);
         InputText();
+        debug_er = getdebuger(mode);
         setVisible(true);
     }
     //菜单
@@ -153,7 +158,13 @@ public class Gui extends JFrame {
     }
     //输入框
     private void InputText(){
-        add(JTA,BorderLayout.CENTER);
+        JTA.setFont(new Res().getfont());
+        JTA.setLineWrap(true);
+        JTA.setWrapStyleWord(true);
+        JScrollPane jsp = new JScrollPane(JTA);
+        jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        add(jsp,BorderLayout.CENTER);
     }
 
     private void OpenFile() throws IOException {
@@ -179,5 +190,23 @@ public class Gui extends JFrame {
         String str = JTA.getText();
         out.write(str.getBytes());
         out.close();
+    }
+
+    private boolean getdebuger(int mode){
+        boolean debug = false;
+        if(mode == 1) debug = true;
+        return debug;
+    }
+}
+
+class Gui_loop extends Thread{
+    S_Shell s_shell = new S_Shell();
+    @Override
+    public void run() {
+        super.run();
+        while (true){
+            if(new DebugShell().isVisible()) s_shell.start();
+            else s_shell.interrupt();
+        }
     }
 }

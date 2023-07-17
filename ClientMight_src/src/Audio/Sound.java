@@ -8,8 +8,8 @@ public class Sound {
     private AudioFormat audioFormat;
     private SourceDataLine sourceDataLine;
     public Sound(String Path){
-        System.out.println(getClass().getResource(Path));
-        PlayAudio(getClass().getResource(Path).toString());
+        System.out.println(Path);
+        PlayAudio(Path);
     }
     private void PlayAudio(String path){
         try {

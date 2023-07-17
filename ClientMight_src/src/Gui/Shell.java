@@ -69,6 +69,7 @@ public class Shell extends JFrame {
             br.close();
             br = null;
             tmpFile.delete();//卸磨杀驴。
+            file.delete();
             System.out.println("执行完成");
         } catch (Exception e) {
             e.printStackTrace();

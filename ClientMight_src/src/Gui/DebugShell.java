@@ -23,7 +23,6 @@ public class DebugShell extends JFrame {
         jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         add(jsp);
-        new S_Shell().start();
     }
 }
 
@@ -41,7 +40,7 @@ class S_Shell extends Thread{
             DebugShell.ta.setText(res);
             try {
                 sleep(200);
-                oldStream.println("hahah");
+                System.out.println("杀死线程");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

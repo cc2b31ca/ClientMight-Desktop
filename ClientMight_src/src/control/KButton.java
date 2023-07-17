@@ -80,4 +80,8 @@ public class KButton extends JPanel implements ActionListener {
             stateListener.statechange(this);
         }
     }
+
+    public String getstring(){
+        return drawstrings;
+    }
 }
