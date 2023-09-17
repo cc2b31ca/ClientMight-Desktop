@@ -3,7 +3,6 @@ package src.Gui;
 import javax.swing.*;
 import src.Logos.*;
 import src.Logos.Scripts.Config;
-import src.Logos.Scripts.LoadPlugins;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -105,6 +104,7 @@ public class Gui extends JFrame {
         File.addSeparator();
         File.add(jmisavefile);
         File.add(jmisaveproject);
+
         //帮助
         JMenu Help = new JMenu(MenuStrings.Help);
         JMenuItem jmiabout = new JMenuItem(MenuStrings.About+"                    ");
